@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: facilities
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,12 +25,15 @@ DROP TABLE IF EXISTS `booking`;
 CREATE TABLE `booking` (
   `booking_id` int NOT NULL,
   `cabin_id` int NOT NULL,
+  `cabin_request_id` int NOT NULL,
   `end_date` date DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `valid_from` time(6) DEFAULT NULL,
   `valid_till` time(6) DEFAULT NULL,
+  `cabin_name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
   `purpose` varchar(255) DEFAULT NULL,
+  `status` enum('all','approved','cancelled','hold','rejected') DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`booking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -42,7 +45,6 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (1,2,'2024-12-02','2024-12-02','13:00:00.000000','17:00:00.000000','YIT','Me','mehuljain5520@gmail.com'),(2,1,'2024-12-02','2024-12-02','10:00:00.000000','17:00:00.000000','YIT','Meeting','jain10836@gmail.com');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,8 +62,10 @@ CREATE TABLE `booking_model` (
   `sno` int NOT NULL,
   `valid_from` time(6) DEFAULT NULL,
   `valid_till` time(6) DEFAULT NULL,
+  `cabin_name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
   `purpose` varchar(255) DEFAULT NULL,
+  `status` enum('all','approved','cancelled','hold','rejected') DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`sno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -73,7 +77,6 @@ CREATE TABLE `booking_model` (
 
 LOCK TABLES `booking_model` WRITE;
 /*!40000 ALTER TABLE `booking_model` DISABLE KEYS */;
-INSERT INTO `booking_model` VALUES (1,2,'2024-12-02',1,'13:00:00.000000','17:00:00.000000','YIT','Me','mehuljain5520@gmail.com'),(2,1,'2024-12-02',2,'10:00:00.000000','17:00:00.000000','YIT','Meeting','jain10836@gmail.com');
 /*!40000 ALTER TABLE `booking_model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +98,7 @@ CREATE TABLE `booking_model_seq` (
 
 LOCK TABLES `booking_model_seq` WRITE;
 /*!40000 ALTER TABLE `booking_model_seq` DISABLE KEYS */;
-INSERT INTO `booking_model_seq` VALUES (101);
+INSERT INTO `booking_model_seq` VALUES (1);
 /*!40000 ALTER TABLE `booking_model_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +120,7 @@ CREATE TABLE `booking_seq` (
 
 LOCK TABLES `booking_seq` WRITE;
 /*!40000 ALTER TABLE `booking_seq` DISABLE KEYS */;
-INSERT INTO `booking_seq` VALUES (101);
+INSERT INTO `booking_seq` VALUES (1);
 /*!40000 ALTER TABLE `booking_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,10 +134,11 @@ DROP TABLE IF EXISTS `cabin`;
 CREATE TABLE `cabin` (
   `cabin_id` int NOT NULL,
   `capacity` int NOT NULL,
+  `booking_type` enum('multiple_day','single_day') DEFAULT NULL,
   `cabin_name` varchar(255) DEFAULT NULL,
   `msg` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
-  `status` enum('Avaliable','Booked','Not_Available','Requested') DEFAULT NULL,
+  `status` enum('Available','Booked','Not_Available','Requested','Reserved') DEFAULT NULL,
   PRIMARY KEY (`cabin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -145,7 +149,6 @@ CREATE TABLE `cabin` (
 
 LOCK TABLES `cabin` WRITE;
 /*!40000 ALTER TABLE `cabin` DISABLE KEYS */;
-INSERT INTO `cabin` VALUES (1,10,'KRISHNA RIVER',NULL,'YIT',NULL),(2,5,'BHRAMPUTR RIVER',NULL,'YIT',NULL),(3,10,'RIVER',NULL,'YIT',NULL);
 /*!40000 ALTER TABLE `cabin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,17 +162,18 @@ DROP TABLE IF EXISTS `cabin_request`;
 CREATE TABLE `cabin_request` (
   `cabin_id` int NOT NULL,
   `end_date` date DEFAULT NULL,
+  `request_date` date DEFAULT NULL,
   `request_id` int NOT NULL,
   `start_date` date DEFAULT NULL,
   `valid_from` time(6) DEFAULT NULL,
   `valid_till` time(6) DEFAULT NULL,
+  `booking_valadity` enum('multiple_day','single_day') DEFAULT NULL,
+  `cabin_avaiability` enum('Available','Booked','Not_Available','Requested','Reserved') DEFAULT NULL,
   `cabin_name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
   `purpose` varchar(255) DEFAULT NULL,
+  `status` enum('all','approved','cancelled','hold','rejected') DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
-  `booking_valadity` enum('multiple_day','single_day') DEFAULT NULL,
-  `cabin_avaiability` enum('Avaliable','Booked','Not_Available','Requested') DEFAULT NULL,
-  `status` enum('all','approved','hold','rejected') DEFAULT NULL,
   PRIMARY KEY (`request_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -180,7 +184,6 @@ CREATE TABLE `cabin_request` (
 
 LOCK TABLES `cabin_request` WRITE;
 /*!40000 ALTER TABLE `cabin_request` DISABLE KEYS */;
-INSERT INTO `cabin_request` VALUES (2,'2024-12-21',1,'2024-12-28','00:00:00.000000','23:00:00.000000','BHRAMPUTR RIVER','YIT','Meeting','mehuljain5520@gmail.com','multiple_day',NULL,'hold'),(2,'2024-12-02',2,'2024-12-02','13:00:00.000000','17:00:00.000000','BHRAMPUTR RIVER','YIT','Me','mehuljain5520@gmail.com','single_day',NULL,'approved'),(1,'2024-12-02',52,'2024-12-02','10:00:00.000000','17:00:00.000000','KRISHNA RIVER','YIT','Meeting','jain10836@gmail.com','single_day',NULL,'approved');
 /*!40000 ALTER TABLE `cabin_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,8 +204,8 @@ CREATE TABLE `cabin_request_model` (
   `cabin_name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
   `purpose` varchar(255) DEFAULT NULL,
+  `status` enum('all','approved','cancelled','hold','rejected') DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
-  `status` enum('all','approved','hold','rejected') DEFAULT NULL,
   PRIMARY KEY (`sno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -213,7 +216,6 @@ CREATE TABLE `cabin_request_model` (
 
 LOCK TABLES `cabin_request_model` WRITE;
 /*!40000 ALTER TABLE `cabin_request_model` DISABLE KEYS */;
-INSERT INTO `cabin_request_model` VALUES (1,2,'2024-12-02',1,'13:00:00.000000','17:00:00.000000','KRISHNA RIVER','YIT','Me','mehuljain5520@gmail.com','approved'),(3,52,'2024-12-02',2,'10:00:00.000000','17:00:00.000000','RIVER','YIT','Meeting','jain10836@gmail.com','approved');
 /*!40000 ALTER TABLE `cabin_request_model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +237,7 @@ CREATE TABLE `cabin_request_model_seq` (
 
 LOCK TABLES `cabin_request_model_seq` WRITE;
 /*!40000 ALTER TABLE `cabin_request_model_seq` DISABLE KEYS */;
-INSERT INTO `cabin_request_model_seq` VALUES (101);
+INSERT INTO `cabin_request_model_seq` VALUES (1);
 /*!40000 ALTER TABLE `cabin_request_model_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +259,7 @@ CREATE TABLE `cabin_request_seq` (
 
 LOCK TABLES `cabin_request_seq` WRITE;
 /*!40000 ALTER TABLE `cabin_request_seq` DISABLE KEYS */;
-INSERT INTO `cabin_request_seq` VALUES (151);
+INSERT INTO `cabin_request_seq` VALUES (1);
 /*!40000 ALTER TABLE `cabin_request_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +286,83 @@ INSERT INTO `cabin_seq` VALUES (1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `office_id`
+--
+
+DROP TABLE IF EXISTS `office_id`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `office_id` (
+  `address` varchar(255) DEFAULT NULL,
+  `office_id` varchar(255) NOT NULL,
+  `office_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`office_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `office_id`
+--
+
+LOCK TABLES `office_id` WRITE;
+/*!40000 ALTER TABLE `office_id` DISABLE KEYS */;
+INSERT INTO `office_id` VALUES ('Indore','BTC','Yash Office'),('INDORE','CIT','Crystal IT Park'),('Indore','YIT','YASH IT PARK');
+/*!40000 ALTER TABLE `office_id` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation` (
+  `cabin_id` int NOT NULL,
+  `reservation_id` int NOT NULL,
+  `status` tinyint DEFAULT NULL,
+  `valid_from` time(6) DEFAULT NULL,
+  `valid_till` time(6) DEFAULT NULL,
+  `date` datetime(6) DEFAULT NULL,
+  `cabin_name` varchar(255) DEFAULT NULL,
+  `office_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`reservation_id`),
+  CONSTRAINT `reservation_chk_1` CHECK ((`status` between 0 and 4))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation_seq`
+--
+
+DROP TABLE IF EXISTS `reservation_seq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation_seq` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation_seq`
+--
+
+LOCK TABLES `reservation_seq` WRITE;
+/*!40000 ALTER TABLE `reservation_seq` DISABLE KEYS */;
+INSERT INTO `reservation_seq` VALUES (1);
+/*!40000 ALTER TABLE `reservation_seq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -296,7 +375,7 @@ CREATE TABLE `user` (
   `name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `role` enum('manager','user') DEFAULT NULL,
+  `role` enum('manager','super_admin','user') DEFAULT NULL,
   `status` enum('ACTIVE','BLOCKED','NOT_ACTIVE','PENDING') DEFAULT NULL,
   PRIMARY KEY (`email_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -308,7 +387,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('jain10836@gmail.com','9644344129','Mehul Jain','YIT','abc','user','ACTIVE'),('mehuljain1590@gmail.com','878','Mehul','YIT','abc','manager','ACTIVE'),('mehuljain5520@gmail.com','9787','mehul','YIT','abc','user','ACTIVE');
+INSERT INTO `user` VALUES ('manager@yash.com','9111164844','Yash Manager','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','manager','ACTIVE'),('superadmin@yash.com','9111164844','Yash Admin','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','super_admin','ACTIVE'),('user@yash.com','9111164844','Yash User','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','user','ACTIVE');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -321,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-02 14:44:51
+-- Dump completed on 2024-12-09 18:46:41
