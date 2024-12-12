@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: facilities
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,6 +45,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (152,1,102,'2024-12-12','2024-12-12','10:00:00.000000','17:00:00.000000','Krishna River','YIT','Meeting','approved','user@yash.com');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,6 +78,7 @@ CREATE TABLE `booking_model` (
 
 LOCK TABLES `booking_model` WRITE;
 /*!40000 ALTER TABLE `booking_model` DISABLE KEYS */;
+INSERT INTO `booking_model` VALUES (152,1,'2024-12-12',152,'10:00:00.000000','17:00:00.000000','Krishna River','YIT','Meeting','approved','user@yash.com');
 /*!40000 ALTER TABLE `booking_model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +100,7 @@ CREATE TABLE `booking_model_seq` (
 
 LOCK TABLES `booking_model_seq` WRITE;
 /*!40000 ALTER TABLE `booking_model_seq` DISABLE KEYS */;
-INSERT INTO `booking_model_seq` VALUES (1);
+INSERT INTO `booking_model_seq` VALUES (251);
 /*!40000 ALTER TABLE `booking_model_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +122,7 @@ CREATE TABLE `booking_seq` (
 
 LOCK TABLES `booking_seq` WRITE;
 /*!40000 ALTER TABLE `booking_seq` DISABLE KEYS */;
-INSERT INTO `booking_seq` VALUES (1);
+INSERT INTO `booking_seq` VALUES (251);
 /*!40000 ALTER TABLE `booking_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,6 +151,7 @@ CREATE TABLE `cabin` (
 
 LOCK TABLES `cabin` WRITE;
 /*!40000 ALTER TABLE `cabin` DISABLE KEYS */;
+INSERT INTO `cabin` VALUES (1,10,'single_day','Krishna River',NULL,'YIT','Available'),(2,10,'multiple_day','Bharamputra River',NULL,'YIT','Available'),(3,10,'single_day','Amazon River',NULL,'YIT','Available'),(52,10,'single_day','Tapi River',NULL,'YIT','Available'),(53,10,'single_day','River',NULL,'YIT','Available'),(54,10,'single_day','Pangeon Lake',NULL,'YIT','Reserved');
 /*!40000 ALTER TABLE `cabin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,6 +187,7 @@ CREATE TABLE `cabin_request` (
 
 LOCK TABLES `cabin_request` WRITE;
 /*!40000 ALTER TABLE `cabin_request` DISABLE KEYS */;
+INSERT INTO `cabin_request` VALUES (1,'2024-12-12','2024-12-12',102,'2024-12-12','10:00:00.000000','17:00:00.000000','single_day',NULL,'Krishna River','YIT','Meeting','approved','user@yash.com'),(52,'2024-12-12','2024-12-12',103,'2024-12-12','12:00:00.000000','17:00:00.000000','single_day',NULL,'Tapi River','YIT','HR Discussion','rejected','user@yash.com'),(2,'2024-12-31','2024-12-12',152,'2024-12-12','00:00:00.000000','23:00:00.000000','multiple_day',NULL,'Bharamputra River','YIT','Client Project development','hold','user@yash.com');
 /*!40000 ALTER TABLE `cabin_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,6 +220,7 @@ CREATE TABLE `cabin_request_model` (
 
 LOCK TABLES `cabin_request_model` WRITE;
 /*!40000 ALTER TABLE `cabin_request_model` DISABLE KEYS */;
+INSERT INTO `cabin_request_model` VALUES (1,102,'2024-12-12',102,'10:00:00.000000','17:00:00.000000','Krishna River','YIT','Meeting','approved','user@yash.com'),(52,103,'2024-12-12',103,'12:00:00.000000','17:00:00.000000','Tapi River','YIT','HR Discussion','rejected','user@yash.com'),(2,152,'2024-12-12',152,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-13',153,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-14',154,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-15',155,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-16',156,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-17',157,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-18',158,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-19',159,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-20',160,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-21',161,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-22',162,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-23',163,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-24',164,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-25',165,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-26',166,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-27',167,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-28',168,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-29',169,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-30',170,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com'),(2,152,'2024-12-31',171,'00:00:00.000000','23:00:00.000000','Bharamputra River','YIT','Client Project development','hold','user@yash.com');
 /*!40000 ALTER TABLE `cabin_request_model` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +242,7 @@ CREATE TABLE `cabin_request_model_seq` (
 
 LOCK TABLES `cabin_request_model_seq` WRITE;
 /*!40000 ALTER TABLE `cabin_request_model_seq` DISABLE KEYS */;
-INSERT INTO `cabin_request_model_seq` VALUES (1);
+INSERT INTO `cabin_request_model_seq` VALUES (251);
 /*!40000 ALTER TABLE `cabin_request_model_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +264,7 @@ CREATE TABLE `cabin_request_seq` (
 
 LOCK TABLES `cabin_request_seq` WRITE;
 /*!40000 ALTER TABLE `cabin_request_seq` DISABLE KEYS */;
-INSERT INTO `cabin_request_seq` VALUES (1);
+INSERT INTO `cabin_request_seq` VALUES (251);
 /*!40000 ALTER TABLE `cabin_request_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +286,7 @@ CREATE TABLE `cabin_seq` (
 
 LOCK TABLES `cabin_seq` WRITE;
 /*!40000 ALTER TABLE `cabin_seq` DISABLE KEYS */;
-INSERT INTO `cabin_seq` VALUES (1);
+INSERT INTO `cabin_seq` VALUES (151);
 /*!40000 ALTER TABLE `cabin_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +311,7 @@ CREATE TABLE `office_id` (
 
 LOCK TABLES `office_id` WRITE;
 /*!40000 ALTER TABLE `office_id` DISABLE KEYS */;
-INSERT INTO `office_id` VALUES ('Indore','BTC','Yash Office'),('INDORE','CIT','Crystal IT Park'),('Indore','YIT','YASH IT PARK');
+INSERT INTO `office_id` VALUES ('INDOEW','BTC','YASH BTC PARK'),('INDORE','CIT','CRYSTAL IT PARK'),('SUPER CORRIDOR','YIT','YASH IT PARK');
 /*!40000 ALTER TABLE `office_id` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,8 +329,9 @@ CREATE TABLE `reservation` (
   `valid_from` time(6) DEFAULT NULL,
   `valid_till` time(6) DEFAULT NULL,
   `date` datetime(6) DEFAULT NULL,
-  `cabin_name` varchar(255) DEFAULT NULL,
   `office_id` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `cabin_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`reservation_id`),
   CONSTRAINT `reservation_chk_1` CHECK ((`status` between 0 and 4))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -337,6 +343,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,2,0,'17:48:00.000000','18:00:00.000000','2024-12-05 05:30:00.000000','YIT',NULL,'Krishna River');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +365,7 @@ CREATE TABLE `reservation_seq` (
 
 LOCK TABLES `reservation_seq` WRITE;
 /*!40000 ALTER TABLE `reservation_seq` DISABLE KEYS */;
-INSERT INTO `reservation_seq` VALUES (1);
+INSERT INTO `reservation_seq` VALUES (101);
 /*!40000 ALTER TABLE `reservation_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +394,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('manager@yash.com','9111164844','Yash Manager','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','manager','ACTIVE'),('superadmin@yash.com','9111164844','Yash Admin','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','super_admin','ACTIVE'),('user@yash.com','9111164844','Yash User','YIT','$2a$10$rQFDUzBXV85K3FE.cJTbiOUZB/5bLXWa6tRu4cH4S8QOoFHUEwSLq','user','ACTIVE');
+INSERT INTO `user` VALUES ('manager@yash.com','9644344129','User','YIT','$2a$10$g9JZqCzs0mJKApar7b3EPuQ2MllWgddfJyA0sXiJ0pS6NvkwZ6nYK','manager','ACTIVE'),('superadmin@yash.com','9644344129','Admin','YIT','$2a$10$g9JZqCzs0mJKApar7b3EPuQ2MllWgddfJyA0sXiJ0pS6NvkwZ6nYK','super_admin','ACTIVE'),('user@yash.com','9111290557','User','YIT','$2a$10$irlqDcPG9.ilt3bJ1rp/w.bkmZWXAIq5.YtXrxcl.0duInBYmGx26','user','ACTIVE');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -400,4 +407,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-09 18:46:41
+-- Dump completed on 2024-12-12 11:57:34
